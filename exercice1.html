@@ -5,6 +5,10 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>RH Helper</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css" integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.6/umd/popper.min.js" integrity="sha384-wHAiFfRlMFy6i5SRaxvfOCifBUQy1xHdJ/yoi7FRNXMRBu5WHdZYu1hA6ZOblgut" crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/js/bootstrap.min.js" integrity="sha384-B0UglyR+jN6CkvvICOB2joaf5I4l3gm9GU6Hc1og6Ls7i6U/mkkaduKaBhlAXv9k" crossorigin="anonymous"></script>
+
 
     <style>
     /* Hide un-compiled mustache bindings
@@ -13,6 +17,9 @@
     [v-cloak] {
       display: none;
     }
+	.container{
+		background-color:#F5F5F5;
+	}
 
     
     </style>
@@ -21,29 +28,33 @@
 <body>
 <div id="main">
 <form v-cloak>
-	<div class="row">
-	//need to import bootstrap
-		<div class="col-md-6">
-			<label for="startDate">Start date</label>
-			<input id="startDate" type="date" v-model="start">
+	<div class="container">
+		<div class="row">
+			<div class="col-md-8">
+				<label for="startDate">Start date</label>
+				<input class="col-md-8" id="startDate" type="date" v-model="start">
+			</div>
+			<div class="col-md-6">
+				<label for="endDate">End date</label>
+				<input class="col-md-8" id="endDate" type="date" v-model="end" >
+			</div>
+			<div class="col-md-8">
+				<label for="nbHours">Worked hours per week</label>
+				<input class="col-md-8" id="nbHours" type="number" v-model="nbHours" >
+			</div>
 		</div>
-		<div class="col-md-6">
-			<label for="endDate">End date</label>
-			<input id="endDate" type="date" v-model="end" >
-		</div>
-		<div class="col-md-6">
-			<label for="nbHours">Worked hours per week</label>
-			<input id="nbHours" type="number" v-model="nbHours" >
+		<div class="row col-sm-6 col-md-3">
+			<input type="button" value="compute" @click="compute">
 		</div>
 	</div>
-	<div class="row">
-		<input type="button" value="compute" @click="compute">
-	</div>
+	
 </form>
-<p v-if="computed !== ''">{{computed}} vacation days</p>
-<p v-if="duration !== ''">Duration in days : {{duration}} days</p>
-<p v-if="duration !== ''">Duration in hours : {{(duration/7) * nbHours }} hours</p>
-<p v-if="etp !== ''"> ETP : {{etp}}</p>
+<div class="container">
+	<p v-if="computed !== ''">{{computed}} vacation days</p>
+	<p v-if="duration !== ''">Duration in days : {{duration}} days</p>
+	<p v-if="duration !== ''">Duration in hours : {{(duration/7) * nbHours }} hours</p>
+	<p v-if="etp !== ''"> ETP : {{etp}}</p>
+</div>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.0.5/vue.min.js"></script>
